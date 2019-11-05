@@ -61,3 +61,6 @@ augroup project
   autocmd!
   autocmd BufRead,BufNewFile *.h,*.c set filetype=c.doxygen
 augroup END
+
+" ctags
+set tags=./tags;/$HOME
