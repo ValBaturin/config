@@ -49,6 +49,7 @@ Plug 'google/vim-glaive'
 Plug '/usr/local/opt/fzf'
 Plug 'fatih/vim-go'
 Plug 'kien/ctrlp.vim'
+Plug 'lervag/vimtex'
 
 call plug#end()
 
