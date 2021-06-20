@@ -8,7 +8,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term termite
+set $term alacritty
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
 # set $menu dmenu_path | dmenu | xargs swaymsg exec
@@ -18,14 +18,19 @@ set $term termite
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg /usr/share/backgrounds/black.jpg fill
+output * bg /usr/share/backgrounds/ab.png fill
 #
 # Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-output eDP-1 scale 2
+output DP-1 scale 2 pos 0,0
+output eDP-1 pos 0 1080
+
+#font pango:monospace 14
+font pango:Cantarell 16px
+
 
 ### Idle configuration
 #
@@ -53,8 +58,8 @@ output eDP-1 scale 2
 #   }
 #
 input * xkb_layout "us,ru"
-input "1452:627:Apple_Inc._Apple_Internal_Keyboard_/_Trackpad" {
-    xkb_options "valmap:val_modkeys,caps:escape,grp:win_space_toggle"
+input type:keyboard {
+    xkb_options "ctrl:swap_lalt_lctl,caps:escape,grp:alt_space_toggle"
 }
 
 # You can get the names of your inputs by running: swaymsg -t get_inputs
@@ -139,6 +144,16 @@ input "1452:627:Apple_Inc._Apple_Internal_Keyboard_/_Trackpad" {
     bindsym $mod+Shift+0 move container to workspace 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
+    workspace 1 output eDP-1
+    workspace 2 output eDP-1
+    workspace 3 output eDP-1
+    workspace 4 output eDP-1
+    workspace 5 output eDP-1
+    workspace 6 output DP-1
+    workspace 7 output DP-1
+    workspace 8 output DP-1
+    workspace 9 output DP-1
+    workspace 10 output DP-1
 #
 # Layout stuff:
 #
@@ -220,16 +235,18 @@ bindsym $mod+r mode "resize"
 # }
  bar {
   position bottom
-  status_command i3status
+  swaybar_command waybar
+
   colors {
         background #20c20e
         statusline #000000
 	separator #20c20e
 	focused_background #20c20e
         inactive_workspace #000000 #20c20e #000000
-        focused_workspace #20c20e #000000 #20c20e 
-        active_workspace #20c20e #000000 #20c20e 
+        focused_workspace #20c20e #000000 #20c20e
+        active_workspace #20c20e #000000 #20c20e
   }
+}
  }
 
 set $black #000000
@@ -243,12 +260,17 @@ bindsym XF86MonBrightnessUp exec light -A 10
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%; exec pactl set-sink-mute @DEFAULT_SINK@ 0
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%; exec pactl set-sink-mute @DEFAULT_SINK@ 0
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Print screen
-bindsym --release $mod+p exec grim /home/val/Screenshots/$(date +'%d.%m.%Y-%H%M%S.png')
-bindsym --release Shift+$mod+p exec grim -g "$(slurp)" /home/val/Screenshots/$(date +'%d.%m.%Y-%H%M%S.png')
+bindsym $mod+p exec grim /home/val/Screenshots/$(date +'%Y%m%d-%H%M%S.png')
+bindsym $mod+p+c exec grim - | wl-copy
+bindsym $mod+Alt+p exec grim -g "$(slurp)" /home/val/Screenshots/$(date +'%Y%m%d-%H%M%S.png')
+bindsym $mod+Alt+p+c exec grim -g "$(slurp)" - | wl-copy
 
 # Lock
-bindsym $mod+l+n exec swaylock -i /usr/share/backgrounds/black.jpg
+bindsym $mod+l+n exec swaylock -i /usr/share/backgrounds/ab.png
 
 include /etc/sway/config.d/*
+
+xwayland enable
