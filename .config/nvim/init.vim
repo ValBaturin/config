@@ -12,8 +12,8 @@ set expandtab
 set shiftwidth=4
 set softtabstop=4
 set laststatus=1
+set nowrap
 set number
-
 
 set colorcolumn=120
 highlight ColorColumn ctermbg=darkred
@@ -43,6 +43,7 @@ nnoremap <leader>c :CtrlPTag<CR>
 "fzf
 nnoremap <leader>b :Buffer<CR>
 nnoremap <leader>f :FZF<CR>
+nnoremap <leader>r :Rg<CR>
 
 "projectionist
 nnoremap <leader>p :A<CR>
@@ -71,6 +72,7 @@ Plug 'morhetz/gruvbox',
 
 Plug 'tpope/vim-fugitive',
 Plug 'tpope/vim-projectionist',
+Plug 'tpope/vim-dispatch'
 
 Plug 'junegunn/goyo.vim',
 Plug 'junegunn/fzf.vim',
@@ -97,10 +99,12 @@ nmap <localleader>w <Plug>(coc-diagnostic-info)
 nmap <localleader>fs <Plug>(coc-format-selected)
 nmap <localleader>f <Plug>(coc-format)
 
+
+autocmd FileType c,cc,cpp,cxx,h,hpp nnoremap <leader>md :Dispatch -compiler=make make -j -C Debug/ <CR>
+
 " ctags
 set tags=./tags;/$HOME
 
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
-
