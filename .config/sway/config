@@ -59,6 +59,8 @@ font pango:Cantarell 16px
 #
 input * xkb_layout "us,ru"
 input type:keyboard {
+    repeat_delay 200
+    repeat_rate 80
     xkb_options "ctrl:swap_lalt_lctl,caps:escape,grp:alt_space_toggle"
 }
 
@@ -149,11 +151,11 @@ input type:keyboard {
     workspace 3 output eDP-1
     workspace 4 output eDP-1
     workspace 5 output eDP-1
-    workspace 6 output DP-1
-    workspace 7 output DP-1
-    workspace 8 output DP-1
-    workspace 9 output DP-1
-    workspace 10 output DP-1
+    workspace 6 output DP-3
+    workspace 7 output DP-3
+    workspace 8 output DP-3
+    workspace 9 output DP-3
+    workspace 10 output DP-3
 #
 # Layout stuff:
 #
@@ -247,7 +249,6 @@ bindsym $mod+r mode "resize"
         active_workspace #20c20e #000000 #20c20e
   }
 }
- }
 
 set $black #000000
 set $green #20c20e
@@ -265,8 +266,9 @@ bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 # Print screen
 bindsym $mod+p exec grim /home/val/Screenshots/$(date +'%Y%m%d-%H%M%S.png')
 bindsym $mod+p+c exec grim - | wl-copy
-bindsym $mod+Alt+p exec grim -g "$(slurp)" /home/val/Screenshots/$(date +'%Y%m%d-%H%M%S.png')
-bindsym $mod+Alt+p+c exec grim -g "$(slurp)" - | wl-copy
+#bindsym $mod+Alt+p exec grim -g "$(slurp)" /home/val/Screenshots/$(date +'%Y%m%d-%H%M%S.png')
+#bindsym $mod+Alt+p+c exec grim -g "$(slurp)" - | wl-copy
+bindsym $mod+Alt+p exec grim -g "$(slurp)" - | wl-copy
 
 # Lock
 bindsym $mod+l+n exec swaylock -i /usr/share/backgrounds/ab.png
